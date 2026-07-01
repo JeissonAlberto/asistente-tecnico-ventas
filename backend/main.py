@@ -9,6 +9,8 @@ class HighLevelAI:
     """Simula una integración con GPT-4 o similar con prompts especializados."""
     def classify_intent(self, text: str) -> dict:
         t = text.lower()
+        if any(x in t for x in ["clave", "contraseña", "wifi", "nombre de red"]):
+            return {"intent": "WIFI_CHANGE", "confidence": 0.99}
         if any(x in t for x in ["lento", "internet", "wifi", "falla", "rojo", "luz"]):
             return {"intent": "SUPPORT", "confidence": 0.98}
         if any(x in t for x in ["megas", "plan", "precio", "cuanto", "mejorar", "promo"]):
@@ -28,6 +30,12 @@ class HighLevelAI:
     def generate_smart_offer(self, plan, is_lead):
         if is_lead: return "¡Hola! Veo que quieres internet de alta velocidad. Tenemos planes desde 100MB con fibra óptica. ¿Te gustaría ver los precios?"
         return f"Noté que usas mucho tu plan de {plan}. Tengo una oferta exclusiva para que saltes a 300MB por un precio especial. ¿Te interesa?"
+
+    def extract_wifi_credentials(self, text: str) -> dict:
+        """Simulación de extracción de datos con NLP."""
+        # En una versión real, aquí usaríamos una llamada a GPT para extraer SSID y Password
+        # Por ahora, simulamos una extracción simple
+        return {"ssid": "MiRedAvidtel_Nueva", "password": "ClaveSegura2026"}
 
     def ask_for_identifier(self):
         return "Para ayudarte, necesito tu número de documento o el ID de contrato que aparece en tu factura."
