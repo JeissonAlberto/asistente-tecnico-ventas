@@ -27,9 +27,16 @@ class HighLevelAI:
     def generate_troubleshooting(self, status):
         return "Tu señal es óptima. Vamos a reiniciar tu conexión desde aquí. Por favor espera 2 minutos y prueba de nuevo."
 
-    def generate_smart_offer(self, plan, is_lead):
-        if is_lead: return "¡Hola! Veo que quieres internet de alta velocidad. Tenemos planes desde 100MB con fibra óptica. ¿Te gustaría ver los precios?"
-        return f"Noté que usas mucho tu plan de {plan}. Tengo una oferta exclusiva para que saltes a 300MB por un precio especial. ¿Te interesa?"
+    def generate_menu_response(self):
+        return (
+            "🤖 *Asistente Virtual Avidtel*\n\n"
+            "¿En qué puedo ayudarte hoy? Selecciona una opción:\n"
+            "1️⃣ Reportar internet lento\n"
+            "2️⃣ Cambiar clave o nombre de WiFi\n"
+            "3️⃣ Consultar mi factura\n"
+            "4️⃣ Mejorar mi plan de megas\n\n"
+            "Escribe el número de la opción que deseas."
+        )
 
     def extract_wifi_credentials(self, text: str) -> dict:
         """Simulación de extracción de datos con NLP."""
