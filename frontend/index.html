@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avidtel AI - Dashboard de Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .status-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans">
+    <nav class="bg-slate-900 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-blue-600 p-2 rounded-lg">
+                    <i class="fas fa-robot text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight">Avidtel <span class="text-blue-400">AI Agent</span></span>
+            </div>
+            <div class="flex items-center space-x-4 text-sm">
+                <span class="flex items-center"><i class="fas fa-circle text-green-500 text-xs mr-2 status-pulse"></i> Sistema Activo</span>
+                <button class="bg-slate-800 px-3 py-1 rounded border border-slate-700 hover:bg-slate-700">Configuración</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Columna Izquierda: Estadísticas Rápidas -->
+        <div class="md:col-span-2 space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="glass p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="text-slate-500 text-sm font-medium">Soporte hoy</p>
+                    <h3 class="text-2xl font-bold text-slate-800">142</h3>
+                    <p class="text-green-600 text-xs mt-1"><i class="fas fa-check"></i> 94% Resuelto x IA</p>
+                </div>
+                <div class="glass p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="text-slate-500 text-sm font-medium">Ventas generadas</p>
+                    <h3 class="text-2xl font-bold text-slate-800">$1.2M</h3>
+                    <p class="text-blue-600 text-xs mt-1"><i class="fas fa-arrow-trend-up"></i> +12% vs ayer</p>
+                </div>
+                <div class="glass p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="text-slate-500 text-sm font-medium">Alertas SmartOLT</p>
+                    <h3 class="text-2xl font-bold text-red-600">3</h3>
+                    <p class="text-slate-400 text-xs mt-1">Potencia crítica detectada</p>
+                </div>
+            </div>
+
+            <!-- Monitor de Chats en Tiempo Real -->
+            <div class="glass rounded-xl border border-slate-200 shadow-md overflow-hidden">
+                <div class="bg-slate-100 p-4 border-b border-slate-200 flex justify-between items-center">
+                    <h4 class="font-semibold text-slate-700"><i class="fas fa-comments mr-2"></i> Actividad de WhatsApp</h4>
+                    <span class="text-xs bg-white px-2 py-1 rounded-full border border-slate-300 text-slate-500">Live View</span>
+                </div>
+                <div class="p-0">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-slate-400 uppercase text-[10px] font-bold">
+                            <tr>
+                                <th class="px-6 py-3">Usuario</th>
+                                <th class="px-6 py-3">Intención</th>
+                                <th class="px-6 py-3">Estado Red</th>
+                                <th class="px-6 py-3">Respuesta IA</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">57313XXXXXXX</td>
+                                <td class="px-6 py-4"><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">SOPORTE</span></td>
+                                <td class="px-6 py-4 text-green-600">-21.5 dBm (OK)</td>
+                                <td class="px-6 py-4 text-slate-500 italic">"He reiniciado tu conexión..."</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-700">57300XXXXXXX</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-bold">VENTA</span></td>
+                                <td class="px-6 py-4 text-slate-400">N/A</td>
+                                <td class="px-6 py-4 text-slate-500 italic">"Ofrecido Plan 200MB"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Configuración y Status -->
+        <div class="space-y-6">
+            <div class="glass p-6 rounded-xl border border-slate-200 shadow-md">
+                <h4 class="font-bold text-slate-800 mb-4 border-b pb-2">Integraciones</h4>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-6 h-6 grayscale opacity-50" alt="SmartOLT">
+                            <span class="text-slate-600 text-sm">SmartOLT API</span>
+                        </div>
+                        <span class="text-xs font-bold text-green-500">CONECTADO</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                            <span class="text-slate-600 text-sm">WhatsApp API</span>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">ESPERANDO</span>
+                    </div>
+                </div>
+                <button class="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition">Ver Logs Completos</button>
+            </div>
+
+            <div class="glass p-6 rounded-xl border border-slate-200 shadow-md bg-blue-900 text-white">
+                <h4 class="font-bold mb-2">Replica Mejorada v2.0</h4>
+                <p class="text-blue-200 text-xs mb-4">Arquitectura de alto rendimiento para Jeisson Alberto.</p>
+                <div class="text-[10px] font-mono bg-blue-950 p-2 rounded border border-blue-800">
+                    $ tail -f /var/log/avidtel-ai.log<br>
+                    [INFO] Diagnóstico ONU OK<br>
+                    [SALE] Prospecto calificado
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
