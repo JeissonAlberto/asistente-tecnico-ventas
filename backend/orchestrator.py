@@ -33,6 +33,8 @@ class SalesSupportOrchestrator:
                 response = self._handle_support_logic(client, text)
             elif intent == "SALES":
                 response = self._handle_sales_logic(client, text)
+            elif intent == "WIFI_CHANGE":
+                response = self._handle_wifi_change(client, text)
             else:
                 response = self.ai.generate_conversational_response(text, context=client)
 
@@ -71,3 +73,24 @@ class SalesSupportOrchestrator:
         # Analizar consumo histórico si la API lo permite, o simplemente ofrecer upgrade
         current_plan = client.get("plan_name", "Básico") if client else "Nuevo Cliente"
         return self.ai.generate_smart_offer(current_plan, is_lead=(client is None))
+
+    def _handle_wifi_change(self, client: Optional[Dict], text: str) -> str:
+        """Lógica para cambio de WiFi vía TR-069."""
+        if not client or not client.get("onu_external_id"):
+            return "Para cambiar tu WiFi, necesito identificarte primero. ¿Me das tu número de documento?"
+
+        # La IA extrae el nuevo SSID y Password del texto del usuario
+        wifi_data = self.ai.extract_wifi_credentials(text)
+        if not wifi_data['ssid'] or not wifi_data['password']:
+            return "Entendido, quieres cambiar tu WiFi. Por favor dime el nuevo nombre y la nueva clave que deseas."
+
+        success = self.smartolt.change_wifi_config(
+            client["onu_external_id"], 
+            wifi_data['ssid'], 
+            wifi_data['password']
+        )
+        
+        if success:
+            return f"✅ ¡Listo! Tu red WiFi ahora se llama '{wifi_data['ssid']}'. Recuerda reconectar tus dispositivos con la nueva clave."
+        else:
+            return "Tuve un problema al intentar cambiar la configuración. Asegúrate de que tu router esté encendido y reintenta."
