@@ -43,8 +43,19 @@ class SmartOLTIntegration:
         res = self._request("POST", f"/onu/reboot/{onu_external_id}")
         return res is not None and res.get("status") == "success"
 
-    def search_client_by_field(self, field_name: str, value: str) -> Optional[list]:
+    def get_client_by_phone(self, phone: str) -> Optional[list]:
         """Búsqueda flexible de clientes."""
-        params = {field_name: value}
+        params = {"phone": phone}
         res = self._request("GET", "/customers/search", params=params)
         return res.get("response") if res else None
+
+    def change_wifi_config(self, onu_external_id: str, ssid: str, password: str) -> bool:
+        """
+        Cambia el nombre de red (SSID) y la contraseña vía TR-069.
+        """
+        data = {
+            "wifi_ssid": ssid,
+            "wifi_password": password
+        }
+        res = self._request("POST", f"/onu/set_wifi_config/{onu_external_id}", data=data)
+        return res is not None and res.get("status") == "success"
